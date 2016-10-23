@@ -1,0 +1,10 @@
+D:\Projects\Microsoft Visual Studio\7_semester\second_task_1\VisualisationLib\bin\Debug\VisualisationLib.dll
+D:\Projects\Microsoft Visual Studio\7_semester\second_task_1\VisualisationLib\bin\Debug\VisualisationLib.pdb
+D:\Projects\Microsoft Visual Studio\7_semester\second_task_1\VisualisationLib\obj\Debug\VisualisationLib.dll
+D:\Projects\Microsoft Visual Studio\7_semester\second_task_1\VisualisationLib\obj\Debug\VisualisationLib.pdb
+D:\Projects\Microsoft Visual Studio\7_semester\second_task_1\VisualisationLib\obj\Debug\VisualisationLib.csprojResolveAssemblyReference.cache
+D:\Projects\Microsoft Visual Studio\7_semester\third_task_1\VisualisationLib\bin\Debug\VisualisationLib.dll
+D:\Projects\Microsoft Visual Studio\7_semester\third_task_1\VisualisationLib\bin\Debug\VisualisationLib.pdb
+D:\Projects\Microsoft Visual Studio\7_semester\third_task_1\VisualisationLib\obj\Debug\VisualisationLib.csprojResolveAssemblyReference.cache
+D:\Projects\Microsoft Visual Studio\7_semester\third_task_1\VisualisationLib\obj\Debug\VisualisationLib.dll
+D:\Projects\Microsoft Visual Studio\7_semester\third_task_1\VisualisationLib\obj\Debug\VisualisationLib.pdb

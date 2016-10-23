@@ -1,0 +1,221 @@
+﻿<Window x:Class="View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:View"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:user="clr-namespace:ViewModel;assembly=ViewModel"
+        Title="MainWindow"
+        Width="1600"
+        Height="800"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d">
+
+    <Window.Resources>
+        <user:DateConverter x:Key="DateConverter" />
+        <user:MConverter x:Key="MConverter" />
+        <user:TConverter x:Key="TConverter" />
+        <user:KConverter x:Key="KConverter" />
+
+        <DataTemplate x:Key="ClimateModelTemplate">
+            <Border Name="border"
+                    Margin="8"
+                    BorderBrush="Aqua"
+                    BorderThickness="2"
+                    Padding="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Path=ModelDescription}" />
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="2"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Path=ModelDate,
+                                              Converter={StaticResource DateConverter}}" />
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="0"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Path=ModelData.M,
+                                              Converter={StaticResource MConverter}}" />
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="1"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Path=ModelData.T,
+                                              Converter={StaticResource TConverter}}" />
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="2"
+                               HorizontalAlignment="Center"
+                               Text="{Binding Path=ModelData.K,
+                                              Converter={StaticResource KConverter}}" />
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Image x:Name="image"
+               Width="{Binding ImageWidth}"
+               Height="{Binding ImageHeight}"
+               Margin="58,162,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Source="{Binding ImagePath}"
+               Stretch="Uniform" />
+
+        <Image Name="image2"
+               Width="{Binding ElementName=image,
+                               Path=Width}"
+               Height="{Binding ElementName=image,
+                                Path=Height}"
+               Margin="{Binding ElementName=image,
+                                Path=Margin}"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Stretch="None">
+            <Image.Source>
+                <DrawingImage>
+                    <DrawingImage.Drawing>
+                        <DrawingGroup Children="{Binding DrawingCollection}" />
+                    </DrawingImage.Drawing>
+                </DrawingImage>
+            </Image.Source>
+        </Image>
+        <TextBox x:Name="textBox"
+                 Width="120"
+                 Height="23"
+                 Margin="58,104,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 IsEnabled="{Binding ElementName=button,
+                                     Path=IsEnabled}"
+                 Text="{Binding SetM,
+                                UpdateSourceTrigger=PropertyChanged}"
+                 TextWrapping="Wrap" />
+        <TextBox x:Name="textBox1"
+                 Width="120"
+                 Height="23"
+                 Margin="215,104,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 IsEnabled="{Binding ElementName=button,
+                                     Path=IsEnabled}"
+                 Text="{Binding SetT,
+                                UpdateSourceTrigger=PropertyChanged}"
+                 TextWrapping="Wrap" />
+        <TextBox x:Name="textBox2"
+                 Width="120"
+                 Height="23"
+                 Margin="403,104,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 IsEnabled="{Binding ElementName=button,
+                                     Path=IsEnabled}"
+                 Text="{Binding SetK,
+                                UpdateSourceTrigger=PropertyChanged}"
+                 TextWrapping="Wrap" />
+        <Button x:Name="button"
+                Width="177"
+                Height="23"
+                Margin="612,104,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding ComputeCollection}"
+                Content="Сформировать коллекцию"
+                IsEnabled="{Binding IsEnabled}" />
+        <TextBlock x:Name="textBlock"
+                   Margin="58,72,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="M - число частиц, (10;1000)"
+                   TextWrapping="Wrap" />
+        <TextBlock x:Name="textBlock1"
+                   Margin="215,72,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="T - время отслеживания, (1;100)"
+                   TextWrapping="Wrap" />
+        <TextBlock x:Name="textBlock2"
+                   Margin="403,72,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="K количество точек в следе, (1;300)"
+                   TextWrapping="Wrap" />
+        <TextBox x:Name="textBox3"
+                 Width="177"
+                 Height="24"
+                 Margin="58,39,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Text="{Binding InputClimateModel.ModelDescription,
+                                UpdateSourceTrigger=PropertyChanged}"
+                 TextWrapping="Wrap" />
+        <DatePicker Width="150"
+                    Margin="290,39,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    DisplayDate="{Binding InputClimateModel.ModelDate}"
+                    SelectedDate="{Binding InputClimateModel.ModelDate}" />
+        <ListBox x:Name="listBox"
+                 Width="396"
+                 Height="566"
+                 Margin="1134,130,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 HorizontalContentAlignment="Stretch"
+                 ItemTemplate="{StaticResource ClimateModelTemplate}"
+                 ItemsSource="{Binding ClimateModelCollection}"
+                 SelectedIndex="{Binding SelectedIndex}"
+                 SelectedItem="{Binding ClimateModel}">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{Binding AddClimateModel}" Header="Добавить модель" />
+                    <MenuItem Command="{Binding RemoveClimateModel}" Header="Удалить модель" />
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
+        <TextBlock x:Name="textBlock3"
+                   Width="85"
+                   Height="18"
+                   Margin="1134,26,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="Поиск"
+                   TextWrapping="Wrap" />
+        <TextBox x:Name="textBox4"
+                 Width="120"
+                 Height="24"
+                 Margin="1134,58,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Text="{Binding Search,
+                                UpdateSourceTrigger=PropertyChanged}"
+                 TextWrapping="Wrap" />
+        <TextBlock x:Name="textBlock4"
+                   Width="163"
+                   Height="16"
+                   Margin="58,18,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="Описание модели"
+                   TextWrapping="Wrap" />
+        <TextBlock x:Name="textBlock5"
+                   Width="253"
+                   Height="28"
+                   Margin="1134,714,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="{Binding Mistake}"
+                   TextWrapping="Wrap" />
+    </Grid>
+</Window>
